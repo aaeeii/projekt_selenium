@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from grepfunc import grep
 
 myemail = "abc@int.pl"
 myname = "Tester"
@@ -118,16 +119,18 @@ class ZikoAptekaCheck(unittest.TestCase):
 
         button_zatwierdz = driver.find_element_by_xpath('//*[@id="content"]/div/a[2]')
         button_zatwierdz.location_once_scrolled_into_view
-        time.sleep(2)
+        time.sleep(1)
         button_zatwierdz.click()
-        time.sleep(3)
+        time.sleep(2)
 
-#KROK 16 -   SPRAWDZ CZY NA STRONIE POJAWILY SIE OSTRZEZENIA Z TEKSTEM "POLE WYMAGANE"
+#KROK 15 -   SPRAWDZ CZY NA STRONIE POJAWILY SIE OSTRZEZENIA Z TEKSTEM "POLE WYMAGANE"
 
         error_text = driver.page_source
         text_found = re.search(r'Pole wymagane', error_text)
         self.assertNotEqual(text_found, None, "CHECKBOXY SA ZAZNACZONE")
-        print("WYMAGANE CHECK BOXY NIE SA ZAZNACZONE")
+        #grep(error_text, "Pole wymagane", i=True, c=True)
+        #grep(error_text, 'Pole wymagane', c=True)
+        print("\n\n***\nWYMAGANE CHECK BOXY NIE SA ZAZNACZONE - TEST DZIALA POPRAWNIE\n***")
 
 if __name__ == "__main__":
     #unittest.main()
